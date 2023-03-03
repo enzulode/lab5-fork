@@ -1,0 +1,3 @@
+rootProject.name = 'programming-team'
+
+include 'common', 'user-io', 'command-handling', 'dao', 'app'

@@ -1,0 +1,37 @@
+apply plugin: 'application'
+
+dependencies {
+    implementation project(':common')
+    implementation project(':user-io')
+    implementation project(':command-handling')
+    implementation project(':dao')
+
+//    implementation 'org.fusesource.jansi:jansi:2.4.0'
+//    implementation 'com.google.guava:guava-io:r03'
+//    implementation 'com.google.guava:guava:31.1-jre'
+
+}
+
+application {
+    mainClass = 'com.megateam.app.App'
+}
+
+run {
+    standardInput = System.in
+    standardOutput = System.out
+}
+
+jar {
+
+    manifest {
+        attributes 'Main-Class': 'com.megateam.app.App'
+    }
+
+    duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+
+    from {
+        configurations.runtimeClasspath.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+}

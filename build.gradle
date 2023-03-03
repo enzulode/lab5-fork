@@ -1,0 +1,30 @@
+allprojects {
+    apply plugin: 'java'
+
+    group = 'com.megateam'
+    version = '1.0.0'
+
+    sourceSets {
+        main {
+            java {
+                srcDirs = ["src/main/java"]
+            }
+            resources {
+                srcDirs = ["src/main/resources"]
+            }
+        }
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        it.options.encoding = 'UTF-8'
+    }
+}
+
+subprojects {
+    repositories {
+        mavenCentral()
+    }
+
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
