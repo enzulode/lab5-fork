@@ -28,8 +28,8 @@ jobs:
 
       - name: Tests completed successfully
         if: success()
-        run: success
+        run: exit 0
 
       - name: Tests failed
         if: failure()
-        run: error
+        run: exit 1
