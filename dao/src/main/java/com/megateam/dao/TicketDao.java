@@ -1,6 +1,8 @@
 package com.megateam.dao;
 
 import com.megateam.dao.data.Ticket;
+import com.megateam.dao.exceptions.DaoFileException;
+import com.megateam.dao.exceptions.EmptyDaoToWriteException;
 import com.megateam.dao.util.LocalDateTimeAdapter;
 
 import javax.xml.bind.annotation.*;
@@ -30,7 +32,7 @@ public class TicketDao implements Dao<Ticket>
 	 */
 	@XmlElementWrapper(name = "tickets")
 	@XmlElement(name = "ticket")
-	private final List<Ticket> tickets;
+	private List<Ticket> tickets;
 
 	/**
 	 * TicketDao default constructor
@@ -39,6 +41,26 @@ public class TicketDao implements Dao<Ticket>
 	{
 		this.tickets = new ArrayList<>();
 		this.creationDate = LocalDateTime.now(ZoneId.systemDefault());
+	}
+
+	/**
+	 * Method saves dao in the file
+	 */
+	@Override
+	public void save() throws DaoFileException, EmptyDaoToWriteException
+	{
+		TicketDaoFileManipulator.write(this);
+	}
+
+	/**
+	 * Method loads dao from the file
+	 */
+	@Override
+	public void load() throws DaoFileException
+	{
+		Dao<Ticket> dao = TicketDaoFileManipulator.read();
+		this.creationDate = dao.getCreationDate();
+		this.tickets = dao.getAll();
 	}
 
 	/**

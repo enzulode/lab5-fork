@@ -1,5 +1,8 @@
 package com.megateam.dao;
 
+import com.megateam.dao.exceptions.DaoFileException;
+import com.megateam.dao.exceptions.EmptyDaoToWriteException;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -10,6 +13,17 @@ import java.util.Optional;
  */
 public interface Dao<T>
 {
+
+	/**
+	 * Method saves dao in the file
+	 */
+	void save() throws DaoFileException, EmptyDaoToWriteException;
+
+	/**
+	 * Method loads dao from the file
+	 */
+	void load() throws DaoFileException;
+
 	/**
 	 * Method returns dao creation date
 	 * @return dao creation date
