@@ -1,6 +1,7 @@
 package com.megateam.handling.resolvers;
 
 import com.megateam.common.commands.Command;
+import com.megateam.common.commands.impl.SaveCommand;
 import com.megateam.common.exceptions.ResolverException;
 import com.megateam.common.exceptions.impl.DefaultResolverUsedException;
 import com.megateam.handling.exchanges.Exchange;
@@ -19,6 +20,7 @@ public interface Resolver
 	 * An immutable variable - registry of implemented commands
 	 */
 	Map<String, Command> COMMAND_REGISTRY = new HashMap<>() {{
+		put("save", new SaveCommand());
 	}};
 
 	/**
