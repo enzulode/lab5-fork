@@ -1,0 +1,18 @@
+name: NOTIFICATIONS
+
+on:
+  merge:
+    branches: [ master ]
+
+jobs:
+  notification:
+    needs: code_cleanup
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_SECRET }}
+          SLACK_USERNAME: Updates Notifier
+          SLACK_TITLE: Some updates in main repository

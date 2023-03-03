@@ -1,0 +1,35 @@
+name: AUTOTESTS
+
+on:
+  pull_request:
+    branches: [ master ]
+  merge:
+    branches: [ master ]
+
+jobs:
+  autotesting:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Setup JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'oracle'
+
+      - name: Cloning the repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: Run tests
+        run: |
+          ./gradlew test
+
+      - name: Tests completed successfully
+        if: success()
+        run: exit 0
+
+      - name: Tests failed
+        if: failure()
+        run: exit 1
