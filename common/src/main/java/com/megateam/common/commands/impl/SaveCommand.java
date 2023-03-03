@@ -1,7 +1,6 @@
 package com.megateam.common.commands.impl;
 
 import com.megateam.common.commands.Command;
-import com.megateam.common.exceptions.ExecutionException;
 import com.megateam.common.util.CommandSource;
 import com.megateam.dao.exceptions.DaoFileException;
 import com.megateam.dao.exceptions.EmptyDaoToWriteException;
