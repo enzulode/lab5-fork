@@ -1,19 +1,17 @@
+plugins {
+    id 'com.github.sherter.google-java-format' version '0.9'
+}
+
 allprojects {
+
     apply plugin: 'java'
+
+    repositories {
+        mavenCentral()
+    }
 
     group = 'com.megateam'
     version = '1.0.0'
-
-    sourceSets {
-        main {
-            java {
-                srcDirs = ["src/main/java"]
-            }
-            resources {
-                srcDirs = ["src/main/resources"]
-            }
-        }
-    }
 
     tasks.withType(JavaCompile).configureEach {
         it.options.encoding = 'UTF-8'
@@ -21,10 +19,6 @@ allprojects {
 }
 
 subprojects {
-    repositories {
-        mavenCentral()
-    }
-
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
 }
