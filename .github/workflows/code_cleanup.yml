@@ -1,0 +1,24 @@
+name: CLEANUP
+
+on:
+  merge:
+    branches: [ master ]
+
+jobs:
+  code_cleanup:
+    needs: autotesting
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Cloning the repository
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: Format the Java code
+        uses: lwerner-lshigh/prettier_action_java@v1.1.1
+        with:
+          prettier_options: '--no-semi --use-tabs --no-bracket-spacing --end-of-line lf --bracket-same-line --write **/*.java'
+          branch: master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
